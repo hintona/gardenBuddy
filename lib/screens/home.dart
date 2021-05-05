@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:garden_buddy/plant.dart';
 import 'package:garden_buddy/screens/plant_view.dart';
@@ -17,12 +19,15 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<Plant> plantList;
   int index;
+  double rain = 20.0;
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-      drawer: SideDrawer(),
+      drawer: SideDrawer(
+        plants: plantList,
+      ),
       appBar: AppBar(
         title: Text(widget.title),
       ),
@@ -93,6 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Future load() async{
     List<Plant> plants = await PlantGetter.loadPlants(context);
     plantList = plants;
+    markPlants();
     return plants;
   }
 
@@ -104,5 +110,19 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     else return "today!";
   }
+
+  markPlants() async{
+    if(1.50 <= rain){
+      for(int i = 0;i < plantList.length; i++){
+        if(!plantList[i].indoor){
+          print(plantList[i].name+" watered");
+          plantList[i].setLastWater(DateTime.now());
+          String _changedPlants = jsonEncode(plantList);
+          JsonWriter(_changedPlants).writeToFile();
+        }
+      }
+    }
+  }
+
 }
 

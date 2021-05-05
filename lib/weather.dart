@@ -2,7 +2,7 @@ import 'package:weather/weather.dart';
 
 class WeatherService{
   final String APIKey = "f0cdf1719b29b1e61b4f76aeae28f0d9";
-  final String initCity = "Milwaukee";
+  final String initCity = "Saratoga Springs";
   WeatherFactory wf;
   String city;
 
@@ -16,7 +16,8 @@ class WeatherService{
   Future<double> getRain() async {
     //here get users selected city
     Weather w = await wf.currentWeatherByCityName(city);
-    double rainfall = w.rainLast3Hours;
+    double rainfall = w.rainLastHour;
+    print("from here: "+rainfall.toString());
     return rainfall;
   }
 

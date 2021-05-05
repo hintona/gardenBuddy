@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:garden_buddy/plant.dart';
 import 'package:garden_buddy/weather.dart';
 
 class SideDrawer extends StatelessWidget {
   final String _time = "12:00pm";
+  final List<Plant> plants;
 
+  SideDrawer({Key key,this.plants}):super(key : key);
+
+  WeatherService ws;
   String currentWeather;
   String city;
 
@@ -75,10 +80,12 @@ class SideDrawer extends StatelessWidget {
   }
 
   loadSettings() async{
-    WeatherService ws = WeatherService();
+    ws = WeatherService();
     currentWeather = await ws.getWeather();
     city = ws.getLoc();
     return true;
   }
+
+
 
 }
