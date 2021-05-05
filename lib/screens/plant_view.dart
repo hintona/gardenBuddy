@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:garden_buddy/plant.dart';
-import 'package:garden_buddy/plant_edit.dart';
+import 'package:garden_buddy/screens/plant_edit.dart';
 
 class ViewPlant extends StatefulWidget{
   final List<Plant> plants;

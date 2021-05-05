@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garden_buddy/plant.dart';
-import 'package:garden_buddy/plant_view.dart';
+import 'package:garden_buddy/screens/plant_view.dart';
 import 'create_plant.dart';
 import 'menu.dart';
 
