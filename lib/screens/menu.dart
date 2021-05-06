@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:garden_buddy/plant.dart';
 import 'package:garden_buddy/weather.dart';
 
+import 'geoScreen.dart';
+
 class SideDrawer extends StatelessWidget {
   final String _time = "12:00pm";
   final List<Plant> plants;
@@ -70,7 +72,14 @@ class SideDrawer extends StatelessWidget {
                         fontSize: 16,
                       )
                   ),
-                  onTap: () => {Navigator.of(context).pop()},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => GeoScreen(),
+                      ),
+                    );
+                  },
                 ),
               ],
             );
