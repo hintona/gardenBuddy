@@ -1,11 +1,14 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:garden_buddy/plant.dart';
 import 'package:garden_buddy/screens/plant_view.dart';
 import 'create_plant.dart';
 import 'menu.dart';
 
+//TODO: Have daily notifications saying what needs watering
+//TODO: allow user to pick the time of their notifications
+//TODO: set icon of app
+//TODO: allow user to store location in settings file
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -123,6 +126,5 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     }
   }
-
 }
 
