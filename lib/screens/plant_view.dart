@@ -92,7 +92,7 @@ class _ViewPlantState extends State<ViewPlant> {
                     });
                     widget.plants[widget.num].setLastWater(DateTime.now());
                     String _changedPlants = jsonEncode(widget.plants);
-                    JsonWriter(_changedPlants).writeToFile();
+                    JsonWriter(_changedPlants, type:JsonType.Plants).writeToFile();
                   },
                 ),
 
@@ -119,7 +119,7 @@ class _ViewPlantState extends State<ViewPlant> {
                   onPressed: () {
                     widget.plants.removeAt(widget.num);
                     String _changedPlants = jsonEncode(widget.plants);
-                    JsonWriter(_changedPlants).writeToFile();
+                    JsonWriter(_changedPlants, type:JsonType.Plants).writeToFile();
                     Navigator.pop(context);
                   },
                   child: Text('Delete plant'),

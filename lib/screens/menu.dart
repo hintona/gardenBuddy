@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:garden_buddy/plant.dart';
+import 'package:garden_buddy/settings.dart';
 import 'package:garden_buddy/weather.dart';
 
 import 'geoScreen.dart';
 
-class SideDrawer extends StatelessWidget {
+class SideDrawer extends StatefulWidget {
   final String _time = "12:00pm";
   final List<Plant> plants;
+
 
   SideDrawer({Key key,this.plants}):super(key : key);
 
   WeatherService ws;
   String currentWeather;
   String city;
+
+  @override
+  _SideDrawerState createState() => _SideDrawerState();
+}
+
+class _SideDrawerState extends State<SideDrawer>{
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +38,7 @@ class SideDrawer extends StatelessWidget {
             return CircularProgressIndicator();
           }
           if(snapshot.hasError){
+            print(snapshot.error);
             return Text("Uh-oh. Looks like something went wrong");
           }
           else{
@@ -37,7 +47,7 @@ class SideDrawer extends StatelessWidget {
                 DrawerHeader(
                   child: Center(
                     child: Text(
-                      "At your garden, the current weather is:\n"+currentWeather,
+                      "At your garden, the current weather is:\n"+widget.currentWeather,
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
@@ -46,7 +56,7 @@ class SideDrawer extends StatelessWidget {
                     color: Colors.green,
                   ),
                 ),
-                Text("Reminder Time: "+_time,
+                Text("Reminder Time: "+widget._time,
                     style: TextStyle(
                       fontSize: 18,
                     )
@@ -58,9 +68,16 @@ class SideDrawer extends StatelessWidget {
                         fontSize: 16,
                       )
                   ),
-                  onTap: () => {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => GeoScreen(),
+                      ),
+                    );
+                  },
                 ),
-                Text("Location: "+city,
+                Text("Location: "+widget.city,
                     style: TextStyle(
                       fontSize: 18,
                     )
@@ -89,9 +106,9 @@ class SideDrawer extends StatelessWidget {
   }
 
   loadSettings() async{
-    ws = WeatherService();
-    currentWeather = await ws.getWeather();
-    city = ws.getLoc();
+    widget.ws = WeatherService(city: 'Sarasota');
+    widget.currentWeather = await widget.ws.getWeather();
+    widget.city = widget.ws.getLoc();
     return true;
   }
 

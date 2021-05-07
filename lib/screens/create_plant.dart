@@ -215,7 +215,7 @@ class _CreatePlantState extends State<CreatePlant> {
                     widget.plants.add(newPlant);
                     newContents = jsonEncode(widget.plants);
                   }
-                  JsonWriter(newContents).writeToFile();
+                  JsonWriter(newContents, type:JsonType.Plants).writeToFile();
                 }
 
                 Navigator.pop(context);

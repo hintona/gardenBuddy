@@ -198,7 +198,7 @@ class _EditPlantState extends State<EditPlant> {
                     ElevatedButton(
                       onPressed: () {
                         String _changedPlants = jsonEncode(widget.plants);
-                        JsonWriter(_changedPlants).writeToFile();
+                        JsonWriter(_changedPlants, type:JsonType.Plants).writeToFile();
                         Navigator.pop(context);
                       },
                       child: Text('Save changes'),

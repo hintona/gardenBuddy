@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:garden_buddy/plant.dart';
 import 'package:garden_buddy/screens/plant_view.dart';
+import 'package:garden_buddy/settings.dart';
 import 'create_plant.dart';
 import 'menu.dart';
 
@@ -121,7 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
           print(plantList[i].name+" watered");
           plantList[i].setLastWater(DateTime.now());
           String _changedPlants = jsonEncode(plantList);
-          JsonWriter(_changedPlants).writeToFile();
+          JsonWriter(_changedPlants, type:JsonType.Plants).writeToFile();
         }
       }
     }

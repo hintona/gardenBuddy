@@ -1,13 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'dart:math';
-
-import 'package:google_api_headers/google_api_headers.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_google_places/flutter_google_places.dart';
-import 'package:google_maps_webservice/places.dart';
-
-const kGoogleApiKey = "AIzaSyCRi9pl0B0bxUeDzZbmHkuJv6nZDjisGI4";
+import 'package:date_time_picker/date_time_picker.dart';
 
 class GeoScreen extends StatefulWidget {
   @override
@@ -19,17 +11,49 @@ class _GeoScreenState extends State<GeoScreen>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Set location"),
+        title: Text("Change Settings"),
       ),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-            ElevatedButton(
-              child: Text("Save & Exit"),
-              onPressed: () => {Navigator.of(context).pop()},
+          child: SingleChildScrollView(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+              DateTimePicker(
+                type: DateTimePickerType.time,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                  ),
+                  hintText: 'Reminder Time'
+                ),
+                firstDate: DateTime(0),
+                lastDate: DateTime(24),
+                dateLabelText: 'Reminder Time',
+                onChanged: (val) => print(val),
+                validator: (val) {
+                  print(val);
+                  return null;
+                },
+                onSaved: (val) => print(val),
               ),
-            ]
+                SizedBox(height: 40),
+              Text("What city is your garden in?"),
+                SizedBox(height: 20),
+              TextFormField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                    ),
+                    hintText: "Enter your city"
+                  ),
+
+              ),
+                SizedBox(height: 40),
+              ElevatedButton(
+                child: Text("Save & Exit"),
+                onPressed: () => {Navigator.of(context).pop()},
+                ),
+              ]
+            ),
           )
         ),
     );

@@ -57,6 +57,7 @@ class Plant {
 }
 
 class PlantGetter{
+
   static Future<File> get _localFile async {
     final path = await _localPath;
     return File('$path/plants.json');
@@ -68,7 +69,7 @@ class PlantGetter{
     return directory.path;
   }
 
-  static Future<String> getFileString() async {
+  static Future<String> _getFileString() async {
     try{
       final file = await _localFile;
       String contents = await file.readAsString();
@@ -80,7 +81,7 @@ class PlantGetter{
 
   static Future<List<Plant>> loadPlants(BuildContext context) async {
     final assetBundle = DefaultAssetBundle.of(context);
-    final data = await getFileString();
+    final data = await _getFileString();
     final form = json.decode(data);
     final list = form.map<Plant>(Plant.fromJson).toList();
     return list;
@@ -88,9 +89,10 @@ class PlantGetter{
 }
 
 class JsonWriter{
+  final JsonType type;
   final String contents;
 
-  JsonWriter(this.contents);
+  JsonWriter(this.contents,{@required this.type});
 
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
@@ -110,13 +112,13 @@ class JsonWriter{
 
   Future<File> get _localFile async {
     final path = await _localPath;
-    return File('$path/plants.json');
+    if(type == JsonType.Plants) {
+      return File('$path/plants.json');
+    }
+    else{
+      return File('$path/settings.json');
+    }
   }
-
-
-  //Future<File> get _localFile async {
-   // return File('lib/assets/plants.json');
-  //}
 
   Future<File> writeToFile() async {
     final file = await _localFile;
@@ -125,6 +127,9 @@ class JsonWriter{
     return file.writeAsString(contents);
   }
 
+}
 
-
+enum JsonType{
+  Settings,
+  Plants
 }
