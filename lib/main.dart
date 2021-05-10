@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'notifications_helper.dart';
 import 'screens/home.dart';
 
 void main() async {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  NotificationAppLaunchDetails notifLaunch;
+  final FlutterLocalNotificationsPlugin notifsPlugin = FlutterLocalNotificationsPlugin();
+  notifLaunch = await notifsPlugin.getNotificationAppLaunchDetails();
+  await initNotifications(notifsPlugin);
+  requestIOSPermissions(notifsPlugin);
+  scheduleNotification(notifsPlugin: notifsPlugin, id: DateTime.now().toString(), body: "A scheduled Notification",scheduledTime: DateTime.now().add(Duration(seconds:10)));
+  runApp(MyApp(notifsPlugin: notifsPlugin));
 }
 
 class MyApp extends StatelessWidget {
+  final FlutterLocalNotificationsPlugin notifsPlugin;
+
+  MyApp({this.notifsPlugin});
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -24,7 +37,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.green,
       ),
-      home: MyHomePage(title: 'GardenBuddy'),
+      home: MyHomePage(title: 'GardenBuddy',notifsPlugin: notifsPlugin),
     );
   }
 }

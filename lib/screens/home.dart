@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:garden_buddy/notifications_helper.dart';
 import 'package:garden_buddy/plant.dart';
 import 'package:garden_buddy/screens/plant_view.dart';
 import 'package:garden_buddy/settings.dart';
@@ -11,9 +13,10 @@ import 'menu.dart';
 //TODO: allow user to store location in settings file
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key key, this.title, this.notifsPlugin}) : super(key: key);
 
   final String title;
+  final FlutterLocalNotificationsPlugin notifsPlugin;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
