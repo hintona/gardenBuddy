@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 
-class GeoScreen extends StatefulWidget {
+class SetsScreen extends StatefulWidget {
   @override
-  _GeoScreenState createState() => _GeoScreenState();
+  _SetsScreenState createState() => _SetsScreenState();
 }
 
-class _GeoScreenState extends State<GeoScreen>{
+class _SetsScreenState extends State<SetsScreen>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(

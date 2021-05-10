@@ -3,7 +3,7 @@ import 'package:garden_buddy/plant.dart';
 import 'package:garden_buddy/settings.dart';
 import 'package:garden_buddy/weather.dart';
 
-import 'geoScreen.dart';
+import 'setsScreen.dart';
 
 class SideDrawer extends StatefulWidget {
   final List<Plant> plants;
@@ -72,7 +72,7 @@ class _SideDrawerState extends State<SideDrawer>{
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => GeoScreen(),
+                        builder: (context) => SetsScreen(),
                       ),
                     );
                   },
@@ -93,7 +93,7 @@ class _SideDrawerState extends State<SideDrawer>{
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => GeoScreen(),
+                        builder: (context) => SetsScreen(),
                       ),
                     );
                   },
