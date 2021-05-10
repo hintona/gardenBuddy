@@ -41,7 +41,7 @@ class _SideDrawerState extends State<SideDrawer>{
             return Center(child:Text("Uh-oh. Looks like something went wrong"));
           }
           else{
-            String time = widget.sets.time.hour.toString()+":"+widget.sets.time.minute.toString();
+            String time = widget.sets.getTime().hour.toString()+":"+widget.sets.getTime().minute.toString();
             return Column(
               children: <Widget>[
                 DrawerHeader(
@@ -72,7 +72,9 @@ class _SideDrawerState extends State<SideDrawer>{
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SetsScreen(),
+                        builder: (context) => SetsScreen(
+                          sets: widget.sets,
+                        ),
                       ),
                     );
                   },
@@ -93,7 +95,9 @@ class _SideDrawerState extends State<SideDrawer>{
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SetsScreen(),
+                        builder: (context) => SetsScreen(
+                          sets: widget.sets,
+                        ),
                       ),
                     );
                   },

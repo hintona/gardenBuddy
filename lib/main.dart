@@ -8,15 +8,16 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final Settings sets = Settings();
-  sets.setTimeOfDay(13, 23);
-  sets.setCityName('Tampa');
+  sets.checkSettings();
+  sets.setTimeOfDay(15,51);
+
 
   NotificationAppLaunchDetails notifLaunch;
   final FlutterLocalNotificationsPlugin notifsPlugin = FlutterLocalNotificationsPlugin();
   notifLaunch = await notifsPlugin.getNotificationAppLaunchDetails();
   await initNotifications(notifsPlugin);
   requestIOSPermissions(notifsPlugin);
-  scheduleNotification(notifsPlugin: notifsPlugin, id: DateTime.now().toString(), body: "A scheduled Notification",scheduledTime: sets.time);
+  scheduleNotification(notifsPlugin: notifsPlugin, id: DateTime.now().toString(), body: "You should water your plants",scheduledTime: sets.getTime());
 
   runApp(MyApp(sets: sets));
 }

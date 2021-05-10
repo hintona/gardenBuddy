@@ -44,7 +44,7 @@ class _EditPlantState extends State<EditPlant> {
                           ),
                           hintText: 'Plant name'
                       ),
-                      onChanged: (val){
+                      onChanged: (val) {
                         widget.plants[widget.num].setName(val);
                       },
                     ),

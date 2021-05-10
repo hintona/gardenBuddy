@@ -5,35 +5,51 @@ import 'package:path_provider/path_provider.dart';
 
 class Settings {
   String cityName;
-  DateTime time;
+  int hour;
+  int min;
 
   Settings({
-    @required this.cityName,
-    @required this.time,
+    this.cityName = 'Sarasota',
+    this.hour,
+    this.min
   });
 
   static Settings fromJson(json) => Settings(
     cityName: json['cityName'],
-    time: json['time']
+    hour: json['hour'],
+    min: json['min']
   );
 
   Map toJson() => {
     'cityName': cityName,
-    'time': time,
+    'hour': hour,
+    'min': min
   };
 
   setCityName(String newName){
     this.cityName = newName;
   }
 
-  setTime(DateTime newTime){
-    this.time = newTime;
+  setTimeOfDay(int newHr, int newMn){
+    hour = newHr;
+    min = newMn;
   }
 
-  setTimeOfDay(int hour, int minute){
-    DateTime newTime = DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day,hour,minute);
-    this.time = newTime;
+  DateTime getTime(){
+    if(hour == null) hour = 12;
+    if(min == null) min = 0;
+    DateTime newTime = DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day,hour,min);
+    return newTime;
   }
+
+  checkSettings(){
+    if(cityName == null){
+      this.setCityName('Sarasota');
+    }
+    if(hour == null) hour = 12;
+    if(min == null) min = 0;
+  }
+
 }
 
 
