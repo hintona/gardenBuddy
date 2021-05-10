@@ -7,6 +7,7 @@ import 'screens/home.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  //TODO: Let user load in settings from json
   final Settings sets = Settings();
   sets.checkSettings();
   sets.setTimeOfDay(15,51);

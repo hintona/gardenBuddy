@@ -15,9 +15,9 @@ class WeatherService{
   Future<double> getRain() async {
     Weather w;
     if(city == null) {
-      w = await wf.currentWeatherByCityName(city);
+      w = await wf.currentWeatherByCityName(initCity);
     }
-    else{ w = await wf.currentWeatherByCityName(initCity); }
+    else{ w = await wf.currentWeatherByCityName(city); }
     double rainfall = w.rainLastHour;
     print("from here: "+rainfall.toString());
     return rainfall;

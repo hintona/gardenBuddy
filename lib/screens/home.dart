@@ -7,10 +7,6 @@ import 'package:garden_buddy/weather.dart';
 import 'create_plant.dart';
 import 'menu.dart';
 
-//TODO: allow user to pick the time of their notifications
-//TODO: allow user to pick their location
-//TODO: allow user to save settings
-
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title, this.sets}) : super(key: key);
 
