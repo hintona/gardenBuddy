@@ -6,22 +6,20 @@ import 'package:garden_buddy/weather.dart';
 import 'geoScreen.dart';
 
 class SideDrawer extends StatefulWidget {
-  final String _time = "12:00pm";
   final List<Plant> plants;
+  final Settings sets;
 
 
-  SideDrawer({Key key,this.plants}):super(key : key);
+  SideDrawer({Key key,this.plants,this.sets}):super(key : key);
 
   WeatherService ws;
   String currentWeather;
-  String city;
 
   @override
   _SideDrawerState createState() => _SideDrawerState();
 }
 
 class _SideDrawerState extends State<SideDrawer>{
-
 
   @override
   Widget build(BuildContext context) {
@@ -31,17 +29,19 @@ class _SideDrawerState extends State<SideDrawer>{
   }
 
   Widget settingsWidget(){
+
     return FutureBuilder(
-        future: loadSettings(),
+        future: loadSettings(widget.sets.cityName),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot){
           if(!snapshot.hasData && !snapshot.hasError){
-            return CircularProgressIndicator();
+            return Center(child:CircularProgressIndicator());
           }
           if(snapshot.hasError){
             print(snapshot.error);
-            return Text("Uh-oh. Looks like something went wrong");
+            return Center(child:Text("Uh-oh. Looks like something went wrong"));
           }
           else{
+            String time = widget.sets.time.hour.toString()+":"+widget.sets.time.minute.toString();
             return Column(
               children: <Widget>[
                 DrawerHeader(
@@ -56,7 +56,7 @@ class _SideDrawerState extends State<SideDrawer>{
                     color: Colors.green,
                   ),
                 ),
-                Text("Reminder Time: "+widget._time,
+                Text("Reminder Time: "+time,
                     style: TextStyle(
                       fontSize: 18,
                     )
@@ -77,7 +77,7 @@ class _SideDrawerState extends State<SideDrawer>{
                     );
                   },
                 ),
-                Text("Location: "+widget.city,
+                Text("Location: "+widget.sets.cityName,
                     style: TextStyle(
                       fontSize: 18,
                     )
@@ -105,13 +105,10 @@ class _SideDrawerState extends State<SideDrawer>{
     );
   }
 
-  loadSettings() async{
-    widget.ws = WeatherService(city: 'Sarasota');
+  loadSettings(String cityName) async{
+    widget.ws = WeatherService(city: cityName);
     widget.currentWeather = await widget.ws.getWeather();
-    widget.city = widget.ws.getLoc();
     return true;
   }
-
-
 
 }

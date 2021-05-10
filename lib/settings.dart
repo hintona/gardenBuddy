@@ -5,7 +5,7 @@ import 'package:path_provider/path_provider.dart';
 
 class Settings {
   String cityName;
-  String time;
+  DateTime time;
 
   Settings({
     @required this.cityName,
@@ -26,8 +26,14 @@ class Settings {
     this.cityName = newName;
   }
 
-  setTime(String newTime){
+  setTime(DateTime newTime){
     this.time = newTime;
   }
 
+  setTimeOfDay(int hour, int minute){
+    DateTime newTime = DateTime(DateTime.now().year,DateTime.now().month,DateTime.now().day,hour,minute);
+    this.time = newTime;
+  }
 }
+
+

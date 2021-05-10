@@ -1,22 +1,21 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:garden_buddy/notifications_helper.dart';
 import 'package:garden_buddy/plant.dart';
 import 'package:garden_buddy/screens/plant_view.dart';
 import 'package:garden_buddy/settings.dart';
+import 'package:garden_buddy/weather.dart';
 import 'create_plant.dart';
 import 'menu.dart';
 
-//TODO: Have daily notifications saying what needs watering
 //TODO: allow user to pick the time of their notifications
-//TODO: allow user to store location in settings file
+//TODO: allow user to pick their location
+//TODO: allow user to save settings
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title, this.notifsPlugin}) : super(key: key);
+  MyHomePage({Key key, this.title, this.sets}) : super(key: key);
 
   final String title;
-  final FlutterLocalNotificationsPlugin notifsPlugin;
+  final Settings sets;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -25,7 +24,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   List<Plant> plantList;
   int index;
-  double rain = 20.0;
+  double rain;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       drawer: SideDrawer(
         plants: plantList,
+        sets: widget.sets,
       ),
       appBar: AppBar(
         title: Text(widget.title),
@@ -104,6 +104,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Future load() async{
     List<Plant> plants = await PlantGetter.loadPlants(context);
     plantList = plants;
+    WeatherService ws = WeatherService(city: widget.sets.cityName);
+    rain = await ws.getRain();
     markPlants();
     return plants;
   }

@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:garden_buddy/settings.dart';
 import 'notifications_helper.dart';
 import 'screens/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  final Settings sets = Settings();
+  sets.setTimeOfDay(13, 23);
+  sets.setCityName('Tampa');
+
   NotificationAppLaunchDetails notifLaunch;
   final FlutterLocalNotificationsPlugin notifsPlugin = FlutterLocalNotificationsPlugin();
   notifLaunch = await notifsPlugin.getNotificationAppLaunchDetails();
   await initNotifications(notifsPlugin);
   requestIOSPermissions(notifsPlugin);
-  scheduleNotification(notifsPlugin: notifsPlugin, id: DateTime.now().toString(), body: "A scheduled Notification",scheduledTime: DateTime.now().add(Duration(seconds:10)));
-  runApp(MyApp(notifsPlugin: notifsPlugin));
+  scheduleNotification(notifsPlugin: notifsPlugin, id: DateTime.now().toString(), body: "A scheduled Notification",scheduledTime: sets.time);
+
+  runApp(MyApp(sets: sets));
 }
 
 class MyApp extends StatelessWidget {
-  final FlutterLocalNotificationsPlugin notifsPlugin;
+  final Settings sets;
 
-  MyApp({this.notifsPlugin});
+  MyApp({this.sets});
 
   // This widget is the root of your application.
   @override
@@ -37,7 +44,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.green,
       ),
-      home: MyHomePage(title: 'GardenBuddy',notifsPlugin: notifsPlugin),
+      home: MyHomePage(title: 'GardenBuddy',sets: sets),
     );
   }
 }

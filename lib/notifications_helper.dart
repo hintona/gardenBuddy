@@ -79,7 +79,7 @@ class NotificationClass {
     var platformChannelSpecifics = notifs.NotificationDetails(
         android: androidSpecifics, iOS: iOSSpecifics);
     print("Notification Scheduled");
-    await notifsPlugin.zonedSchedule(0, title, "Scheduled notification",
+    await notifsPlugin.zonedSchedule(0, title, "Time to water your plants!",
         scheduledDate, platformChannelSpecifics, androidAllowWhileIdle: true, uiLocalNotificationDateInterpretation: notifs.UILocalNotificationDateInterpretation.absoluteTime); // This literally schedules the notification
   }
   

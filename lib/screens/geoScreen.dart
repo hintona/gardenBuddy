@@ -19,6 +19,8 @@ class _GeoScreenState extends State<GeoScreen>{
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                Text("What time would you like to be reminded?",style: TextStyle(fontSize: 18),),
+                SizedBox(height: 20),
               DateTimePicker(
                 type: DateTimePickerType.time,
                 decoration: InputDecoration(
@@ -37,7 +39,7 @@ class _GeoScreenState extends State<GeoScreen>{
                 onSaved: (val) => print(val),
               ),
                 SizedBox(height: 40),
-              Text("What city is your garden in?"),
+              Text("What city is your garden in?",style: TextStyle(fontSize: 18),),
                 SizedBox(height: 20),
               TextFormField(
                   decoration: InputDecoration(
@@ -52,6 +54,8 @@ class _GeoScreenState extends State<GeoScreen>{
                 child: Text("Save & Exit"),
                 onPressed: () => {Navigator.of(context).pop()},
                 ),
+                SizedBox(height: 20),
+                Text("Note: these changes will not take effect until the app restarts"),
               ]
             ),
           )
