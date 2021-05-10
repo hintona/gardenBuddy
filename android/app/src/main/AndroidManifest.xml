@@ -2,7 +2,7 @@
     package="com.mobileappsncf.garden_buddy">
    <application
         android:label="garden_buddy"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

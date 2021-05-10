@@ -8,7 +8,6 @@ import 'menu.dart';
 
 //TODO: Have daily notifications saying what needs watering
 //TODO: allow user to pick the time of their notifications
-//TODO: set icon of app
 //TODO: allow user to store location in settings file
 
 class MyHomePage extends StatefulWidget {
