@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:date_time_picker/date_time_picker.dart';
 import 'package:garden_buddy/settings.dart';
-import 'package:numberpicker/numberpicker.dart';
 
 class SetsScreen extends StatefulWidget {
   final Settings sets;
@@ -31,8 +29,9 @@ class _SetsScreenState extends State<SetsScreen>{
               children: <Widget>[
                 Text("What time would you like to be reminded?",style: TextStyle(fontSize: 18),),
                 SizedBox(height: 20),
-              Center( //TODO: fix the alignment here
+              Center(
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       ConstrainedBox(
                         constraints: BoxConstraints.tight(const Size(50, 50)),
@@ -145,7 +144,7 @@ class _SetsScreenState extends State<SetsScreen>{
                       ),
                       ConstrainedBox(
                         constraints: BoxConstraints.tight(const Size(50, 50)),
-                        child: Text(" :",style: TextStyle(fontSize: 25)),
+                        child: Text("   :",style: TextStyle(fontSize: 25)),
                       ),
                       ConstrainedBox(
                         constraints: BoxConstraints.tight(const Size(50, 50)),
@@ -153,43 +152,43 @@ class _SetsScreenState extends State<SetsScreen>{
                           value: _min,
                           items: [
                             DropdownMenuItem(
-                              child: Text("0"),
+                              child: Text("00"),
                               value: 0,
                             ),
                             DropdownMenuItem(
-                              child: Text("1"),
+                              child: Text("01"),
                               value: 1,
                             ),
                             DropdownMenuItem(
-                              child: Text("2"),
+                              child: Text("02"),
                               value: 2,
                             ),
                             DropdownMenuItem(
-                              child: Text("3"),
+                              child: Text("03"),
                               value: 3,
                             ),
                             DropdownMenuItem(
-                              child: Text("4"),
+                              child: Text("04"),
                               value: 4,
                             ),
                             DropdownMenuItem(
-                              child: Text("5"),
+                              child: Text("05"),
                               value: 5,
                             ),
                             DropdownMenuItem(
-                              child: Text("6"),
+                              child: Text("06"),
                               value: 6,
                             ),
                             DropdownMenuItem(
-                              child: Text("7"),
+                              child: Text("07"),
                               value: 7,
                             ),
                             DropdownMenuItem(
-                              child: Text("8"),
+                              child: Text("08"),
                               value: 8,
                             ),
                             DropdownMenuItem(
-                              child: Text("9"),
+                              child: Text("09"),
                               value: 9,
                             ),
                             DropdownMenuItem(
@@ -423,7 +422,6 @@ class _SetsScreenState extends State<SetsScreen>{
                 onPressed: () => {
                   Navigator.of(context).pop(),
                   newSets.setTimeOfDay(_hour,_min),
-                  //TODO: also save newSets
                   SettingsGetter.writeSettings(newSets)
                 },
                 ),

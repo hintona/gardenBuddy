@@ -41,7 +41,9 @@ class _SideDrawerState extends State<SideDrawer>{
             return Center(child:Text("Uh-oh. Looks like something went wrong"));
           }
           else{
-            String time = widget.sets.getTime().hour.toString()+":"+widget.sets.getTime().minute.toString();
+            String mins = widget.sets.getTime().minute.toString();
+            if(widget.sets.getTime().minute < 10) mins = "0"+widget.sets.getTime().minute.toString();
+            String time = widget.sets.getTime().hour.toString()+":"+mins;
             return Column(
               children: <Widget>[
                 DrawerHeader(
