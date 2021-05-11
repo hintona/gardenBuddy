@@ -93,9 +93,7 @@ class SettingsGetter{
 
   static Future<File> writeSettings(Settings sets) async {
     final file = await _localFile;
-    print("Done");
-    var data = sets.toJson();
-    print(data.toString());
+    var data = jsonEncode(sets);
     return file.writeAsString(data.toString());
   }
 
