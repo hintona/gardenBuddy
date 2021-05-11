@@ -31,7 +31,7 @@ class _SetsScreenState extends State<SetsScreen>{
               children: <Widget>[
                 Text("What time would you like to be reminded?",style: TextStyle(fontSize: 18),),
                 SizedBox(height: 20),
-              Center(
+              Center( //TODO: fix the alignment here
                 child: Row(
                     children: <Widget>[
                       ConstrainedBox(
@@ -424,6 +424,7 @@ class _SetsScreenState extends State<SetsScreen>{
                   Navigator.of(context).pop(),
                   newSets.setTimeOfDay(_hour,_min),
                   //TODO: also save newSets
+                  SettingsGetter.writeSettings(newSets)
                 },
                 ),
                 SizedBox(height: 20),

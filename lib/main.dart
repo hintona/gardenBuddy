@@ -7,10 +7,15 @@ import 'screens/home.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  //TODO: Let user load in settings from json
-  final Settings sets = Settings();
-  sets.checkSettings();
-  sets.setTimeOfDay(15,51);
+  //TODO: make sure saved settings can be loaded
+  Settings sets;
+  try {
+    sets = await SettingsGetter.loadSettings();
+    print("Loaded");
+  } catch (e){
+    sets = Settings();
+    print("Defaulted\nERROR "+e.toString());
+  }
 
 
   NotificationAppLaunchDetails notifLaunch;

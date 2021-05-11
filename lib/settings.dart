@@ -10,9 +10,17 @@ class Settings {
 
   Settings({
     this.cityName = 'Sarasota',
-    this.hour,
-    this.min
+    this.hour = 12,
+    this.min = 15
   });
+
+  /*factory Settings.fromJson(Map<String, dynamic> parsedJson) {
+    return Settings(
+      cityName: parsedJson['cityName'],
+      hour: parsedJson['hour'],
+      min: parsedJson['min']
+    );
+  }*/
 
   static Settings fromJson(json) => Settings(
     cityName: json['cityName'],
@@ -48,6 +56,47 @@ class Settings {
     }
     if(hour == null) hour = 12;
     if(min == null) min = 0;
+  }
+
+}
+
+class SettingsGetter{
+  static Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+    return directory.path;
+  }
+
+  static Future<File> get _localFile async {
+    final path = await _localPath;
+    return File('$path/settings.json');
+  }
+
+  static Future<String> _getFileString() async {
+    try{
+      final file = await _localFile;
+      String contents = await file.readAsString();
+      return contents;
+    } catch(e) {
+      return null;
+    }
+  }
+
+  static Future<Settings> loadSettings() async {
+    final data = await _getFileString();
+    print("this0");
+    print(data);
+    final form = json.decode(data);
+    print("this1");
+    final Settings sets = Settings.fromJson(form);
+    return sets;
+  }
+
+  static Future<File> writeSettings(Settings sets) async {
+    final file = await _localFile;
+    print("Done");
+    var data = sets.toJson();
+    print(data.toString());
+    return file.writeAsString(data.toString());
   }
 
 }

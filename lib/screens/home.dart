@@ -102,6 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
     plantList = plants;
     WeatherService ws = WeatherService(city: widget.sets.cityName);
     rain = await ws.getRain();
+    if(rain == null) rain = 0;
     markPlants();
     return plants;
   }
