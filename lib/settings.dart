@@ -14,14 +14,6 @@ class Settings {
     this.min = 15
   });
 
-  /*factory Settings.fromJson(Map<String, dynamic> parsedJson) {
-    return Settings(
-      cityName: parsedJson['cityName'],
-      hour: parsedJson['hour'],
-      min: parsedJson['min']
-    );
-  }*/
-
   static Settings fromJson(json) => Settings(
     cityName: json['cityName'],
     hour: json['hour'],
@@ -83,10 +75,7 @@ class SettingsGetter{
 
   static Future<Settings> loadSettings() async {
     final data = await _getFileString();
-    print("this0");
-    print(data);
     final form = json.decode(data);
-    print("this1");
     final Settings sets = Settings.fromJson(form);
     return sets;
   }

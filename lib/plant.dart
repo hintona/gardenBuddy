@@ -121,8 +121,6 @@ class JsonWriter{
 
   Future<File> writeToFile() async {
     final file = await _localFile;
-
-    // Write the file.
     return file.writeAsString(contents);
   }
 

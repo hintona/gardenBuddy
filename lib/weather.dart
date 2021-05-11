@@ -19,7 +19,6 @@ class WeatherService{
     }
     else{ w = await wf.currentWeatherByCityName(city); }
     double rainfall = w.rainLastHour;
-    print("from here: "+rainfall.toString());
     return rainfall;
   }
 

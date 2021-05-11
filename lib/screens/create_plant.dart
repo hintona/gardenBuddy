@@ -61,7 +61,6 @@ class _CreatePlantState extends State<CreatePlant> {
             lastDate: DateTime.now());
             newDate = date;
             dateController.text = date.toString().substring(0,10);
-            print(newDate);
             },
             onChanged: (value) {
 

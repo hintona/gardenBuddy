@@ -60,11 +60,11 @@ class _MyHomePageState extends State<MyHomePage> {
           return CircularProgressIndicator();
         }
         if(snapshot.hasError && plantList != null && plantList.length != 0){
-          return Text("An error has occurred:\n" + snapshot.error.toString());
+          return Center(child:Text("An error has occurred:\n" + snapshot.error.toString()));
         }
         if(plantList == null || plantList.length == 0){
-          return Text("Hey! Looks like you don't have any plants yet. \n"+
-          "Why don't you tap on the + in the bottom right corner and add some?");
+          return Center(child:Text("Hey! Looks like you don't have any plants yet. \n"+
+          "Why don't you tap on the + in the bottom right corner and add some?"),);
         }
         else{
           index = plantList.length;
@@ -120,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if(1.50 <= rain){
       for(int i = 0;i < plantList.length; i++){
         if(!plantList[i].indoor){
-          print(plantList[i].name+" watered");
+          //print(plantList[i].name+" watered");
           plantList[i].setLastWater(DateTime.now());
           String _changedPlants = jsonEncode(plantList);
           JsonWriter(_changedPlants, type:JsonType.Plants).writeToFile();
