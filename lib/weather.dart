@@ -2,7 +2,7 @@ import 'package:garden_buddy/settings.dart';
 import 'package:weather/weather.dart';
 
 class WeatherService{
-  final String APIKey = "f0cdf1719b29b1e61b4f76aeae28f0d9";
+  final String APIKey = "4dcccccbe1096b1d994947a1244d7562";
   final String initCity = "Sarasota";
   WeatherFactory wf;
   String city;
